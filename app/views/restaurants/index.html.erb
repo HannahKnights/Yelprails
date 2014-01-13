@@ -1,0 +1,11 @@
+<% if @restaurants.none? %>
+No restaurants have been listed yet!
+<% end %>
+
+
+<% @restaurants.each do |restaurant| %>
+  <%= restaurant.name %>
+  <%= restaurant.description %>
+  <%= link_to 'Edit restaurant', edit_restaurant_path(restaurant) %>
+  <%= link_to 'Delete restaurant', restaurant_path(restaurant), :method => :delete, data: { :confirm => 'Are you sure you want to delete this restaurant?'} %>
+<% end %>
