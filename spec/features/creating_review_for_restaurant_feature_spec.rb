@@ -21,6 +21,13 @@ describe 'reviewing' do
       expect(page).to have_content 'Good food'
     end
 
+    it 'should display your average review rating' do
+      Restaurant.first.reviews << Review.create(rating: 5)
+      Restaurant.first.reviews << Review.create(rating: 3)
+      visit '/restaurants'
+      expect(page).to have_content 'Average rating: 4'
+    end
+
   end
 
 end
