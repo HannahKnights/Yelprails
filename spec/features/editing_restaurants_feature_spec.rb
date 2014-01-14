@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'editing restaurants' do
 
   before do
-  Restaurant.create(name: 'Old Name')
+    Restaurant.create(name: 'Old Name')
   end
 
   it 'should update restaurant information' do
