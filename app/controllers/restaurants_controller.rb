@@ -6,7 +6,7 @@ class RestaurantsController < ApplicationController
 
   def create
     Restaurant.create params[:restaurant].permit(:name, :description)
-    redirect_to '/restaurants'
+    redirect_to restaurants_path
   end
 
   def index
@@ -20,13 +20,13 @@ class RestaurantsController < ApplicationController
   def update
     @restaurant = Restaurant.find(params[:id])
     @restaurant.update params[:restaurant].permit(:name, :description)
-    redirect_to '/restaurants'
+    redirect_to restaurants_path
   end
 
   def destroy
     @restaurant = Restaurant.find(params[:id])
     @restaurant.destroy
-    redirect_to '/restaurants'
+    redirect_to restaurants_path
   end
 
   def show

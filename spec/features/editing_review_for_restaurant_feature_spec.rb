@@ -11,7 +11,7 @@ describe 'editing a review' do
 
     visit '/restaurants'
     click_link 'Edit review'
-    fill_in 'Content', with: 'Bad food'
+    fill_in 'Review', with: 'Bad food'
     select('1', :from => 'Rating')
     click_button 'Update'
     expect(page).to have_content 'Bad food'
