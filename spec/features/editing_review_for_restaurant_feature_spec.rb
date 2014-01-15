@@ -8,8 +8,8 @@ describe 'editing a review' do
   end
 
   it 'should update the review information' do
-
-    visit '/restaurants'
+    restaurant_id = Restaurant.first.id
+    visit '/restaurants/' + restaurant_id.to_s
     click_link 'Edit review'
     fill_in 'Review', with: 'Bad food'
     select('1', :from => 'Rating')

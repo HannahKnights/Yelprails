@@ -8,8 +8,8 @@ describe 'deleting a review of a restaurant' do
   end
 
   it 'should no longer appear on the list of restaurants' do
-
-    visit '/restaurants'
+    restaurant_id = Restaurant.first.id
+    visit '/restaurants/' + restaurant_id.to_s
     expect(page).to have_content 'Good food'
     click_link 'Delete review'
     expect(page).not_to have_content 'Good food'
