@@ -17,4 +17,26 @@ require 'spec_helper'
 
     end
 
+    context 'with a missing name or description field' do
+
+      it 'should raise an error if it does not have a description' do
+
+        visit 'restaurants/new'
+        fill_in 'Name', with: 'La Scala'
+        click_button 'Create Restaurant'
+        expect(page).to have_content 'error'
+
+      end
+
+      it 'should raise an error if it does not have a name' do
+
+        visit 'restaurants/new'
+        fill_in 'Description', with: 'Italian food'
+        click_button 'Create Restaurant'
+        expect(page).to have_content 'error'
+
+      end
+
+    end
+
   end
