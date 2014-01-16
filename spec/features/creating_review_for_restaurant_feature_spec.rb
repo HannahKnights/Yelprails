@@ -1,36 +1,37 @@
 require 'spec_helper'
+require_relative 'helpers/sessions'
 
-describe 'creating a review' do 
+include SessionHelpers
+
+describe 'creatign a review' do 
+
+  let!(:restaurant) {create(:restaurant)}
   
-  before do
-    user = create(:user)
-    login_as user
-    create(:review, user: user, restaurant: create(:restaurant))
-  end
+  context 'as a user who is' do
 
-  context 'for a restaurant' do
-
-    it 'should allow you to create a review' do
-      visit '/restaurants'
-      click_link 'La Scala'
-      click_link 'Add a review'
-      fill_in 'Author Name', with: 'User'
-      fill_in 'Review', with: 'Good food'
-      select('10', :from => 'Rating')
-      click_button 'Create Review'
+    it 'logged in' do
+      login_as create(:user)
+      add_review( restaurant.name, 'User', 'Good food', '10')
       expect(page).to have_content 'User'
-      expect(page).to have_content 'Good food'
       expect(page).to have_content 'Good food'
     end
 
-    it 'should display your average review rating' do
+    it 'logged out' do
       visit '/restaurants'
-      expect(page).to have_content 'Average rating: 5'
+      click_link restaurant.name
+      click_link 'Add a review'
+      expect(page).to have_content 'Login'
+      expect(page).not_to have_field 'Review'
     end
 
   end
 
   context 'with missing fields' do
+
+    before do
+      login_as create(:user)
+    end
+  
 
     it 'should raise an error if it does not have a rating' do
       visit '/restaurants'
@@ -43,23 +44,28 @@ describe 'creating a review' do
     end
 
     it 'should raise an error if it does not have an author' do
-      visit '/restaurants'
-      click_link 'La Scala'
-      click_link 'Add a review'
-      fill_in 'Review', with: 'Good food'
-      select('10', :from => 'Rating')
-      click_button 'Create Review'
+      add_review( restaurant.name, '', 'Good food', '10')
       expect(page).to have_content 'error'
     end
 
     it 'should raise an error if it does not have any content' do
-      visit '/restaurants'
-      click_link 'La Scala'
-      click_link 'Add a review'
-      fill_in 'Author Name', with: 'User'
-      select('10', :from => 'Rating')
-      click_button 'Create Review'
+      add_review( restaurant.name, 'User', '', '10')
       expect(page).to have_content 'error'
+    end
+
+  end
+
+  context 'that is successful' do
+
+    before do
+      user = create(:user)
+      login_as user
+      create(:review, user: user, restaurant: create(:restaurant))
+    end
+
+    it 'should display your average review rating' do
+      visit '/restaurants'
+      expect(page).to have_content 'Average rating: 5'
     end
 
   end
