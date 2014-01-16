@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'deleting a restaurant' do 
 
   before do
-  Restaurant.create(name: 'La Scala', description: 'Italian food')
+    create(:restaurant)
   end
 
   it 'should no longer appear on the lists of restaurants' do
