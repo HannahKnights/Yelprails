@@ -9,7 +9,6 @@ describe 'deleting a review of a restaurant' do
   end
 
   it 'should no longer appear on the list of restaurants' do
-
     visit '/restaurants/' + restaurant.id.to_s
     expect(page).to have_content 'Average food'
     click_link 'Delete review'
