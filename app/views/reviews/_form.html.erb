@@ -1,9 +1,6 @@
 <%= render 'error_form' %>
 
 <%= form_for [@restaurant, @review] do |form| %>
-  
-  <%= form.label :name, 'Author Name' %>
-  <%= form.text_field :name %>
 
   <%= form.label :content, 'Review' %>
   <%= form.text_area :content %>

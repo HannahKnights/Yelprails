@@ -1,10 +1,9 @@
 module SessionHelpers
 
-  def add_review(restaurant_name, author, content, rating)
+  def add_review(restaurant_name, content, rating)
     visit '/restaurants'
     click_link restaurant_name
     click_link 'Add a review'
-    fill_in 'Author Name', with: author
     fill_in 'Review', with: content
     select(rating, :from => 'Rating')
     click_button 'Create Review'

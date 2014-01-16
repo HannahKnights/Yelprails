@@ -3,7 +3,7 @@
   <% restaurant.reviews.each do |review| %>
     <%= review.content %>
     <%= review.rating %>
-    <%= review.name %>
+    <%= review.user.email %>
     <%= link_to 'Edit review', edit_restaurant_review_path(restaurant, review) %>
     <%= link_to 'Delete review', restaurant_review_path(restaurant, review), :method => :delete, data: { :confirm => 'Are you sure you want to delete this restaurant?'} %>
   <% end %>
