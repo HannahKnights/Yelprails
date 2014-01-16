@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe '.average_rating' do
   
-  let(:restaurant) {Restaurant.create(name: 'La Scala', description: 'Italian food')}
+  let(:user) { create(:user) }
+  let(:restaurant) { create(:restaurant) }
 
   context 'with no ratings' do
   
@@ -15,7 +16,7 @@ describe '.average_rating' do
   context 'with one rating' do
 
     it 'returns the rating' do
-      restaurant.reviews << Review.new(rating: 5, name: 'User', content: 'Good food')
+      restaurant.reviews << build(:review, user: user)
       expect(restaurant.average_rating).to eq 5
     end
   
@@ -24,8 +25,8 @@ describe '.average_rating' do
   context 'with more than one rating' do
 
     it 'returns the average' do
-      restaurant.reviews << Review.new(rating: 5, name: 'User', content: 'Good food')
-      restaurant.reviews << Review.new(rating: 3, name: 'User', content: 'Good food')
+      restaurant.reviews << build(:review, rating: 5, user: user)
+      restaurant.reviews << build(:review, rating: 3, user: user)
       expect(restaurant.average_rating).to eq 4
     end
   

@@ -1,9 +1,11 @@
 require 'spec_helper'
 
 describe 'creating a review' do 
-
+  
   before do
-    Restaurant.create(name: 'La Scala', description: 'Italian food')
+    user = create(:user)
+    login_as user
+    create(:review, user: user, restaurant: create(:restaurant))
   end
 
   context 'for a restaurant' do
@@ -22,10 +24,8 @@ describe 'creating a review' do
     end
 
     it 'should display your average review rating' do
-      Restaurant.first.reviews << Review.create(rating: 5, name: 'User', content: 'Average food')
-      Restaurant.first.reviews << Review.create(rating: 3, name: 'AnotherUser', content: 'Bad food')
       visit '/restaurants'
-      expect(page).to have_content 'Average rating: 4'
+      expect(page).to have_content 'Average rating: 5'
     end
 
   end

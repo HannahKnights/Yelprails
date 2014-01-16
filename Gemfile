@@ -36,10 +36,12 @@ gem 'spring',        group: :development
 
 gem 'devise'
 
+
 group :test, :development do 
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'capybara'
+  gem 'factory_girl'
 
 end
 

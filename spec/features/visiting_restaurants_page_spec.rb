@@ -5,7 +5,7 @@ describe 'visiting restaurants index page' do
   context 'having created a Restaurant' do
 
     it 'should have the name and description of the restaurant' do
-      Restaurant.create(name: 'La Scala', description: 'Italian food')
+      create(:restaurant)
       visit '/restaurants'
       expect(page).to have_content 'La Scala'
       expect(page).to have_content 'Italian food'
