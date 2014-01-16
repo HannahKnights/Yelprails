@@ -9,10 +9,8 @@ end
 
 def create
   @restaurant = Restaurant.find(params[:restaurant_id])
-  @review = @restaurant.reviews.create params[:review].permit(:name, :content, :rating)
-
+  @review = @restaurant.reviews.create params[:review].permit(:content, :rating)
   @review.user = current_user
-
   @review.save ? redirect_to(restaurant_path(@restaurant)) : render('new')
 end
 
@@ -24,7 +22,7 @@ end
 def update
   @restaurant = Restaurant.find(params[:restaurant_id])
   @review = @restaurant.reviews.find(params[:id])
-  @review.update params[:review].permit(:name, :content, :rating)
+  @review.update params[:review].permit(:content, :rating)
   redirect_to restaurant_path(@restaurant)
 end
 

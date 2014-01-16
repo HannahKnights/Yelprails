@@ -11,8 +11,8 @@ describe 'creatign a review' do
 
     it 'logged in' do
       login_as create(:user)
-      add_review( restaurant.name, 'User', 'Good food', '10')
-      expect(page).to have_content 'User'
+      add_review( restaurant.name, 'Good food', '10')
+      expect(page).not_to have_content 'error'
       expect(page).to have_content 'Good food'
     end
 
@@ -37,19 +37,13 @@ describe 'creatign a review' do
       visit '/restaurants'
       click_link 'La Scala'
       click_link 'Add a review'
-      fill_in 'Author Name', with: 'User'
       fill_in 'Review', with: 'Good food'
       click_button 'Create Review'
       expect(page).to have_content 'error'
     end
 
-    it 'should raise an error if it does not have an author' do
-      add_review( restaurant.name, '', 'Good food', '10')
-      expect(page).to have_content 'error'
-    end
-
     it 'should raise an error if it does not have any content' do
-      add_review( restaurant.name, 'User', '', '10')
+      add_review( restaurant.name, '', '10')
       expect(page).to have_content 'error'
     end
 
