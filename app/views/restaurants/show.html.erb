@@ -1,6 +1,9 @@
 <%= @restaurant.name %>
 <%= @restaurant.description %>
 <%= @restaurant.address %>
+
+<%= image_tag @restaurant.url %>
+
 <%= link_to 'Edit restaurant', edit_restaurant_path(@restaurant) %>
 <%= link_to 'Delete restaurant', restaurant_path(@restaurant), :method => :delete, data: { :confirm => 'Are you sure you want to delete this restaurant?'} %>
 
