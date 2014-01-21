@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0.beta1'
@@ -38,10 +40,16 @@ gem 'devise'
 
 gem 'geocoder'
 
-gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git', :branch => 'bootstrap3'
+gem 'twitter-bootstrap-rails', :github => 'seyhunak/twitter-bootstrap-rails', :branch => 'bootstrap3'
 
+group :production do
+
+  gem 'rails_12factor'
+
+end
 
 group :test, :development do 
+  
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'capybara'
