@@ -29,6 +29,17 @@ map.addMarker({
     }
 });
 
+map.addMarker({
+  lat: <%= @restaurant.latitude %>,
+  lng: <%= @restaurant.longitude %>,
+  title: 'Lima',
+  click: function(e) {
+  },
+    infoWindow: {
+    content: '<p></p>'
+    }
+});
+
 
 
 </script>

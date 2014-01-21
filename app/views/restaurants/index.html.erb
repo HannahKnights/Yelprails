@@ -2,6 +2,17 @@
 No restaurants have been listed yet!
 <% end %>
 
+<div id='map'>
+</div>
+
+  <script>
+var map = new GMaps({
+  div: '#map',
+  lat: <%= @restaurants.average('latitude') %>,
+  lng: <%= @restaurants.average('longitude') %>
+});
+
+</script>
 
 <% @restaurants.each do |restaurant| %>
   <%= link_to restaurant.name, restaurant_path(restaurant) %>
@@ -10,4 +21,23 @@ No restaurants have been listed yet!
   <%= restaurant.average_rating %>
   <%= link_to 'Edit restaurant', edit_restaurant_path(restaurant) %>
   <%= link_to 'Delete restaurant', restaurant_path(restaurant), :method => :delete, data: { :confirm => 'Are you sure you want to delete this restaurant?'} %>
+
+  <script>
+
+map.addMarker({
+  lat: <%= restaurant.latitude %>,
+  lng: <%= restaurant.longitude %>,
+  title: 'Lima',
+  click: function(e) {
+  },
+    infoWindow: {
+    content: '<%= link_to restaurant.name, restaurant_path(restaurant) %><%= restaurant.description %><%= restaurant.average_rating %>'
+    }
+});
+
+</script>
+
+
 <% end %>
+
+
