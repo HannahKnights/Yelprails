@@ -4,7 +4,7 @@ describe 'editing a review' do
 
   let(:restaurant) { create(:restaurant) }
 
-   before do
+  before do
     user = create(:user)
     login_as user
     create(:review, user: user, restaurant: restaurant)

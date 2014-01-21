@@ -7,7 +7,7 @@ describe 'creatign a review' do
 
   let!(:restaurant) {create(:restaurant)}
   
-  context 'as a user who is' do
+  context 'as a user who has' do
 
     it 'logged in' do
       login_as create(:user)
@@ -22,6 +22,13 @@ describe 'creatign a review' do
       click_link 'Add a review'
       expect(page).to have_content 'Login'
       expect(page).not_to have_field 'Review'
+    end
+
+    xit 'already posted a review' do 
+      login_as create(:user)
+      add_review( restaurant.name, 'Good food', '10')
+      expect(page).to have_content 'Good food'
+      expect(page).not_to have_link 'Add a review'
     end
 
   end
